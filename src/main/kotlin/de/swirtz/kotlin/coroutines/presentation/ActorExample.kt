@@ -29,7 +29,7 @@ suspend fun SendChannel<CounterMsg>.getCurrentCount(): Int {
 fun main(args: Array<String>) = runBlocking<Unit> {
     val counter = counterActor()
 
-    GlobalScope.launch {
+    launch(Dispatchers.Default) {
         repeat(100) {
             delay(20)
             println("sending IncCounter message")
@@ -37,10 +37,10 @@ fun main(args: Array<String>) = runBlocking<Unit> {
         }
     }
 
-    GlobalScope.launch {
+    launch(Dispatchers.Default) {
         while (counter.getCurrentCount() < 100) {
             delay(50)
         }
-    }.join()
-    counter.close() // shutdown the actor
+        counter.close() // shutdown the actor
+    }
 }

@@ -11,14 +11,14 @@ import kotlin.system.measureTimeMillis
 fun main() = runBlocking<Unit> {
     log.debug("in runBlocking")
     val time = measureTimeMillis {
-        val one = async { doSomethingUsefulOne() }
-        val two = async { doSomethingUsefulTwo() }
+        val one = async { doSomethingUsefulSuspending() }
+        val two = async { doSomethingUsefulSuspending() }
         println("The answer is ${one.await() + two.await()}")
     }
     println("Completed in $time ms")
 }
 
-suspend fun doSomethingUsefulOne(): BigInteger = withContext(Dispatchers.Default) {
+suspend fun doSomethingUsefulSuspending(): BigInteger = withContext(Dispatchers.Default) {
     executeAndMeasureTimeMillis {
         log.debug("in doSomethingUsefulOne")
         BigInteger(1500, Random()).nextProbablePrime()
@@ -27,13 +27,11 @@ suspend fun doSomethingUsefulOne(): BigInteger = withContext(Dispatchers.Default
     log.debug("Prime calculation took ${it.second} ms")
 }.first
 
-
-suspend fun doSomethingUsefulTwo(): BigInteger = withContext(Dispatchers.Default) {
-    executeAndMeasureTimeMillis {
-        log.debug("in doSomethingUsefulOne")
-        BigInteger(1500, Random()).nextProbablePrime()
-    }
+fun doSomethingUsefulBlocking(): BigInteger = executeAndMeasureTimeMillis {
+    log.debug("in doSomethingUsefulOne")
+    BigInteger(1500, Random()).nextProbablePrime()
 }.also {
     log.debug("Prime calculation took ${it.second} ms")
 }.first
+
 

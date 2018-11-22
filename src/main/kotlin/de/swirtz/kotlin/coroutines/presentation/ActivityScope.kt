@@ -30,6 +30,7 @@ class Activity : CoroutineScope {
     }
 }
 
+
 fun main(args: Array<String>) = runBlocking {
     with(Activity()) {
         create()
@@ -40,4 +41,5 @@ fun main(args: Array<String>) = runBlocking {
         destroy()
         delay(1000L)
     }
+
 }
