@@ -41,5 +41,4 @@ fun main(args: Array<String>) = runBlocking {
         destroy()
         delay(1000L)
     }
-
 }

@@ -3,10 +3,10 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
-val kotlinxCoroutinesVersion = "1.0.0"
+val kotlinxCoroutinesVersion = "1.0.1"
 
 plugins {
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm") version "1.3.10"
 }
 
 tasks.withType<KotlinCompile> {
